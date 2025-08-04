@@ -1,6 +1,7 @@
-addpath("C:\Users\bryan\essay\Vp\data");
-addpath("C:\Users\bryan\essay\Vp\risk_free_rate")
-addpath("C:\Users\bryan\essay\Vp\implied_vol");
+currentScriptPath = fileparts(mfilename('fullpath'));
+addpath(fullfile(currentScriptPath, 'data'));
+addpath(fullfile(currentScriptPath, 'risk_free_rate'));
+addpath(fullfile(currentScriptPath, 'implied_vol'));
 
 spot = readtable("C:\Users\bryan\essay\Vp\files\2023-08-31_2023-09-01.csv");
 

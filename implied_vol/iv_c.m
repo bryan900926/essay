@@ -4,7 +4,7 @@ function implied_vol = iv_c(df, exdate, date, rf_df, S)
 
     if height(df) < 2
         warning("Not enough data points.");
-        implied_vol = NaN;
+        implied_vol = 0;
         return;
     end
 
@@ -14,7 +14,7 @@ function implied_vol = iv_c(df, exdate, date, rf_df, S)
 
     if numel(unique_moneyness) < 2
         warning("Not enough unique moneyness points.");
-        implied_vol = NaN;
+        implied_vol = 0;
         return;
     end
 
@@ -23,11 +23,11 @@ function implied_vol = iv_c(df, exdate, date, rf_df, S)
 
     % Step 1: Interpolate implied volatility over moneyness
     try
-        xx = linspace(min(df.moneyness), max(df.moneyness), 350); % moneyness = S / K
+        xx = linspace(min(unique_moneyness), max(unique_moneyness), 100); % moneyness = S / K
         sigma = spline(unique_moneyness, unique_iv, xx);
     catch ME
         warning("Spline interpolation failed: %s");
-        implied_vol = NaN;
+        implied_vol = 0;
         return;
     end
 

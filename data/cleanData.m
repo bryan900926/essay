@@ -1,5 +1,5 @@
 function filteredDf = cleanData(optionDf, S)
-    optionDf = optionDf(optionDf.volume > 0 & startsWith(optionDf.symbol, 'SPXW'), :);
+    optionDf = optionDf(optionDf.volume > 0 & startsWith(optionDf.symbol, 'SPXW') & ~isnan(optionDf.impl_volatility), :);
     optionDf.moneyness = optionDf.strike_price / (1000 * S);
     optionDf = optionDf(0.85 <= optionDf.moneyness & optionDf.moneyness <= 1.15, :);
     optionDf.midQuote = (optionDf.best_bid + optionDf.best_offer) / 2;
